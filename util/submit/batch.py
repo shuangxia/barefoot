@@ -52,10 +52,10 @@ for sample in samples:
     if options.id != None:
         sample["id"] = options.id
 
-tmp = "batch-%s" % random.randint(0, sys.maxint)
+tmp = "batch-%s" % random.randint(0, 999999999)
 file = open(tmp, "w")
 file.write("{\"format\": \"%s\", \"request\": %s}\n" % (options.format, json.dumps(samples)))
 file.close()
-
-subprocess.call("cat %s | netcat %s %s" % (tmp, options.host, options.port), shell=True)
+print("cat %s | nc %s %s" % (tmp, options.host, options.port))
+subprocess.call("cat %s | nc %s %s" % (tmp, options.host, options.port), shell=True)
 os.remove(tmp)
